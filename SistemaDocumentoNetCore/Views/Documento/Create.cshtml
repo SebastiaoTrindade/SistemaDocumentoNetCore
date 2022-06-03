@@ -1,0 +1,70 @@
+﻿@model SistemaDocumentoNetCore.Models.Documento
+
+@{
+    ViewData["Title"] = "Inserir Documento";
+}
+
+<h4>Insira um Documento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Codigo" class="control-label"></label>
+                <input asp-for="Codigo" onkeypress="return apenasNumeros(event);" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Processo" class="control-label"></label>
+                <select name="Processo" id="Processo" asp-for="Processo" class="form-control"></select>
+                <span asp-validation-for="Processo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categoria" class="control-label"></label>
+                <input asp-for="Categoria" class="form-control" />
+                <span asp-validation-for="Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Arquivo" class="control-label"></label>
+                <input type="file" asp-for="Arquivo" multiple class="form-control" />
+                <span asp-validation-for="Arquivo" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-link">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    function apenasNumeros(evt)
+    {
+        // Apenas números
+        if (window.event) { 
+        var charCode = evt.keyCode;
+        } else if (evt.which) { 
+        var charCode = evt.which
+        }
+
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+        }
+        return true;
+        }
+
+</script>
